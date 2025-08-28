@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <meta name="description" content="{{meta_description}}">
+    <link rel="canonical" href="{{canonical_url}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:description" content="{{meta_description}}" />
+    <meta property="og:url" content="{{canonical_url}}" />
+    <meta property="og:site_name" content="n8n Workflow Hub" />
+    <meta property="og:image" content="{{og_image}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{title}}" />
+    <meta name="twitter:description" content="{{meta_description}}" />
+    <meta name="twitter:image" content="{{og_image}}" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2QLR6GTPFW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2QLR6GTPFW');
+
+        (function() {
+            try {
+                const theme = localStorage.getItem('theme');
+                if (theme) {
+                    document.documentElement.className = theme;
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    document.documentElement.className = 'light';
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+    <header id="header">
+        <div class="header-content">
+            <a href="/" class="logo-container">
+                <svg class="logo-svg" height="100" width="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M94.768 24.796c2.733 1.635 4.243 3.902 5.232 6.871.213 2.915.242 5.455-1.333 8l-.354.629C96.917 42.53 94.551 44.07 92 44.667c-3.238.659-6.121.084-8.901-1.717a12.9 12.9 0 0 1-3.766-4.949v-1q-2.793.035-5.587.087-.95.017-1.899.028-1.367.018-2.735.047l-.853.007c-2.042.05-3.491.423-5.009 1.887-.747 1.209-.984 2.332-1.25 3.715-.575 2.685-1.149 5.023-3.333 6.896.445.962.968 1.715 1.625 2.542 1.2 1.74 1.522 3.582 1.856 5.634.33 1.848.835 2.835 2.186 4.157.987.67 1.736.743 2.917.708l.807-.018.609-.024.283-.647c1.274-2.749 2.818-4.834 5.643-6.091 3.08-1.088 5.963-1.223 8.975.148 2.885 1.611 4.788 3.741 5.766 6.923.686 3.465.177 6.241-1.723 9.212-1.55 1.999-3.757 3.653-6.277 4.121-3.78.362-6.636-.13-9.604-2.542-1.102-1.013-1.585-1.83-2.083-3.229-.334-.881-.334-.881-.979-1.563-1.101-.334-2.122-.508-3.257-.655-2.952-.403-5.133-1.769-7.035-4.074-1.231-1.896-1.657-4.035-2.088-6.227-.396-1.907-.839-3.042-2.287-4.378-1.49-.706-2.998-.799-4.625-.875l-.695-.039q-.84-.046-1.68-.086l-.112.741c-.579 2.417-2.479 4.616-4.556 5.927-3.045 1.525-5.949 1.85-9.208.833-2.869-1.168-4.772-3.125-6.199-5.84-.259-.659-.259-.659-.259-1.659h-6l-.333 1.667c-1.609 3.104-3.74 5.019-7.056 6.103-2.904.709-5.453.203-8.061-1.188-2.366-1.452-4.18-3.447-5.058-6.118-.606-3.055-.421-6.092 1.174-8.798 1.715-2.462 3.973-4.305 6.96-4.905 3.195-.429 5.964-.01 8.633 1.901 1.754 1.491 2.923 2.848 3.741 5.004v1h6L27 46.021c.887-2.621 2.642-4.433 5.083-5.688 2.757-1.264 5.55-1.429 8.458-.5 2.869 1.168 4.772 3.125 6.199 5.84.26.66.26.66.26 1.66 4.467-.005 4.467-.005 8.197-2.211.652-1.095.834-2.242 1.074-3.477.774-3.546 1.896-6.369 4.962-8.523 2.659-1.58 5.375-1.841 8.4-1.822l.843.002q1.325.004 2.649.01l1.803.005q2.202.006 4.405.016l.314-1.126c.835-2.857 2.813-4.427 5.353-5.874 3.231-1.304 6.653-1.012 9.768.462m-8.938 5.682c-1.013 1.16-1.451 2.053-1.601 3.585.143 1.753.617 3.196 1.952 4.402 1.495.968 2.734 1.063 4.486.868 1.621-.572 2.838-1.478 3.667-3 .456-1.535.415-2.711-.021-4.25-.859-1.441-1.7-2.471-3.361-2.961-1.957-.313-3.622-.07-5.121 1.356M6.216 46.91c-.865 1.475-1.042 2.708-.752 4.387.41 1.42 1.146 2.349 2.224 3.328 1.543.591 3.016.586 4.646.375 1.503-.683 2.366-1.575 3.1-3.027.529-1.45.522-2.645-.084-4.033-.779-1.345-1.511-2.405-3.016-2.94-2.424-.326-4.544-.104-6.117 1.91m26.45-.243c-.974 1.583-1.142 2.825-.858 4.618.383 1.432 1.133 2.359 2.212 3.34 1.721.659 3.641.799 5.367.07 1.329-.877 2.093-1.834 2.612-3.362.256-1.971-.223-3.396-1.333-5-1.199-1.17-2.183-1.434-3.812-1.521-1.806.073-2.977.495-4.188 1.854m42.25 15.729c-1.006 1.617-1.362 2.944-1.042 4.833.681 1.641 1.313 2.489 2.854 3.396 1.56.46 2.72.572 4.271.042 1.359-.899 2.477-1.765 3-3.333.213-1.799.124-3.297-.892-4.831-.954-1.087-2.019-1.707-3.448-1.951-1.991-.091-3.335.475-4.743 1.844"/></svg>
+            </a>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search {{workflow_count}} workflows..." autocomplete="off">
+            </div>
+            <nav>
+                <button id="theme-switcher" class="icon-button">
+                    <svg id="theme-icon-sun" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun" title="Switch to Light Mode"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    <svg id="theme-icon-moon" class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon" title="Switch to Dark Mode"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+                </button>
+                <a href="https://github.com/mgks/n8n" target="_blank" rel="noopener noreferrer" class="icon-button" title="View on GitHub">
+                    <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github-icon lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div id="pageContent">
+            {{content}}
+        </div>
+        <div id="resultsContainer"></div>
+    </main>
+    <footer>
+        <div class="footer-content">
+             <p>Built by <a href="https://github.com/mgks" target="_blank">@mgks</a></p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+    <script src="/src/app.js"></script>
+</body>
+</html>

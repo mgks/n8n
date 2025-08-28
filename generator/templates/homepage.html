@@ -1,0 +1,27 @@
+<div class="homepage-content">
+    <div class="intro-section">
+        <h2>Searchable Directory for n8n Workflows.</h2>
+        <p>
+            Instantly search thousands of community-sourced n8n workflows from the excellent 
+            <a href="https://github.com/Zie619/n8n-workflows" target="_blank">Zie619/n8n-workflows</a> repository,
+            without needing to clone or run anything locally.
+        </p>
+    </div>
+
+    <div class="stats-bar">
+        <span><strong>{{workflow_count}}</strong> Workflows</span>
+        <span>•</span>
+        <span><strong>{{tool_count}}</strong> Tools</span>
+        <span>•</span>
+        <span>Updated Daily</span>
+    </div>
+
+    {{highlighted_workflow}}
+
+    <div class="browse-section" id="browseSection">
+        <h3>Browse by Tool</h3>
+        <div class="tools-container" id="toolsContainer">
+            {{tools}}
+        </div>
+    </div>
+</div>
