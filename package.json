@@ -1,0 +1,30 @@
+{
+  "name": "n8n-workflow-hub",
+  "version": "1.0.0",
+  "description": "The first centralised, searchable, and hosted directory of n8n workflows.",
+  "main": "generator/build.js",
+  "scripts": {
+    "clean": "node -e \"require('fs-extra').removeSync('./docs'); require('fs-extra').removeSync('./tmp');\"",
+    "build": "npm run clean && node generator/build.js",
+    "dev": "npm run build && http-server docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgks/n8n.git"
+  },
+  "author": "mgks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mgks/n8n/issues"
+  },
+  "homepage": "https://github.com/mgks/n8n#readme",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "fuse.js": "^7.0.0",
+    "simple-git": "^3.25.0",
+    "sitemap": "^8.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
