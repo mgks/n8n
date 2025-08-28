@@ -142,9 +142,16 @@ async function renderSite(data) {
 async function generateSitemap(data) {
     console.log('[Sitemap] Starting sitemap generation...');
     try {
-        const stream = new SitemapStream({ hostname: BASE_URL });
+        const stream = new SitemapStream({
+            hostname: BASE_URL,
+            xmlns: {
+                news: false,
+                xhtml: false,
+                image: false,
+                video: false,
+            }
+        });
 
-        // Create an array of all links
         const links = [
             { url: '/', changefreq: 'daily', priority: 1.0 }
         ];
@@ -157,22 +164,18 @@ async function generateSitemap(data) {
             links.push({ url: `/${wf.path}`, changefreq: 'weekly', priority: 0.6 });
         }
 
-        // Write all links to the stream
         links.forEach(link => stream.write(link));
         stream.end();
 
-        // Convert the stream to a string in memory
         const sitemapXml = (await streamToPromise(stream)).toString();
         console.log(`[Sitemap] Generated XML content (${sitemapXml.length} bytes).`);
 
-        // Write the complete string to the file
         const sitemapPath = path.join(DOCS_DIR, 'sitemap.xml');
         await fs.writeFile(sitemapPath, sitemapXml);
         console.log(`[Sitemap] Successfully written to ${sitemapPath}`);
 
     } catch (error) {
         console.error('[Sitemap] Failed to generate sitemap:', error);
-        // We re-throw the error to ensure the build process fails if the sitemap fails
         throw error;
     }
 }
