@@ -145,23 +145,22 @@ async function generateSitemap(data) {
         const stream = new SitemapStream({
             hostname: BASE_URL,
             xmlns: {
-                news: false,
-                xhtml: false,
-                image: false,
-                video: false,
+                xsi: true,
             }
         });
 
+        const lastmod = new Date().toISOString();
+
         const links = [
-            { url: '/', changefreq: 'daily', priority: 1.0 }
+            { url: '/', changefreq: 'daily', priority: 1.0, lastmod }
         ];
 
         for (const toolName in data.tools) {
-            links.push({ url: `/workflow/${toolName}/`, changefreq: 'daily', priority: 0.8 });
+            links.push({ url: `/workflow/${toolName}/`, changefreq: 'daily', priority: 0.8, lastmod });
         }
 
         for (const wf of data.workflows) {
-            links.push({ url: `/${wf.path}`, changefreq: 'weekly', priority: 0.6 });
+            links.push({ url: `/${wf.path}`, changefreq: 'weekly', priority: 0.6, lastmod });
         }
 
         links.forEach(link => stream.write(link));
