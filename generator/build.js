@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const simpleGit = require('simple-git');
 const { parseWorkflows } = require('./parse.js');
-const { renderSite } = require('./render.js');
+const { renderSite, generateSitemap } = require('./render.js'); // Ensure generateSitemap is imported
 
 const SOURCE_REPO = 'https://github.com/Zie619/n8n-workflows.git';
 const TMP_DIR = path.join(__dirname, '../tmp/n8n-workflows');
@@ -30,11 +30,9 @@ async function main() {
     // Ensure the output directory exists
     await fs.ensureDir(OUTPUT_DIR);
 
-    // --- NEW STEP: COPY STATIC ASSETS ---
     // Copy everything from /static into /docs/src
     console.log('Copying static assets...');
     await fs.copy(STATIC_DIR, path.join(OUTPUT_DIR, 'src'));
-    // ------------------------------------
 
     // 3. Generate the searchable index file
     await fs.writeJson(path.join(OUTPUT_DIR, 'index.json'), data.workflows);
@@ -44,7 +42,12 @@ async function main() {
     console.log('Generating static site...');
     await renderSite(data);
 
-    // 5. Clean up temporary files
+    // 5. Generate sitemap --- THIS IS THE CRITICAL STEP THAT WAS MISSING ---
+    console.log('Generating sitemap...');
+    await generateSitemap(data);
+    console.log('Created sitemap.xml');
+
+    // 6. Clean up temporary files
     console.log('Cleaning up temporary files...');
     await fs.remove(TMP_DIR);
 

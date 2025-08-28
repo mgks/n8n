@@ -1,7 +1,7 @@
 // generator/render.js
 const fs = require('fs-extra');
 const path = require('path');
-const { createWriteStream } = require('fs');
+const { SitemapStream, streamToPromise } = require('sitemap');
 
 const DOCS_DIR = path.join(__dirname, '../docs');
 const TEMPLATES_DIR = path.join(__dirname, 'templates');
@@ -140,31 +140,41 @@ async function renderSite(data) {
 }
 
 async function generateSitemap(data) {
-    const { SitemapStream, streamToPromise } = require('sitemap');
-    const links = [];
+    console.log('[Sitemap] Starting sitemap generation...');
+    try {
+        const stream = new SitemapStream({ hostname: BASE_URL });
 
-    // Homepage
-    links.push({ url: '/', changefreq: 'daily', priority: 1.0 });
+        // Create an array of all links
+        const links = [
+            { url: '/', changefreq: 'daily', priority: 1.0 }
+        ];
 
-    // Tool pages
-    for (const toolName in data.tools) {
-        links.push({ url: `/workflow/${toolName}/`, changefreq: 'daily', priority: 0.8 });
+        for (const toolName in data.tools) {
+            links.push({ url: `/workflow/${toolName}/`, changefreq: 'daily', priority: 0.8 });
+        }
+
+        for (const wf of data.workflows) {
+            links.push({ url: `/${wf.path}`, changefreq: 'weekly', priority: 0.6 });
+        }
+
+        // Write all links to the stream
+        links.forEach(link => stream.write(link));
+        stream.end();
+
+        // Convert the stream to a string in memory
+        const sitemapXml = (await streamToPromise(stream)).toString();
+        console.log(`[Sitemap] Generated XML content (${sitemapXml.length} bytes).`);
+
+        // Write the complete string to the file
+        const sitemapPath = path.join(DOCS_DIR, 'sitemap.xml');
+        await fs.writeFile(sitemapPath, sitemapXml);
+        console.log(`[Sitemap] Successfully written to ${sitemapPath}`);
+
+    } catch (error) {
+        console.error('[Sitemap] Failed to generate sitemap:', error);
+        // We re-throw the error to ensure the build process fails if the sitemap fails
+        throw error;
     }
-
-    // Workflow pages
-    for (const wf of data.workflows) {
-        links.push({ url: `/${wf.path}`, changefreq: 'weekly', priority: 0.6 });
-    }
-
-    const stream = new SitemapStream({ hostname: BASE_URL });
-    
-    // Write all links to the stream
-    links.forEach(link => stream.write(link));
-    stream.end();
-
-    // Convert the stream to a buffer and then write to file
-    const sitemapData = await streamToPromise(stream);
-    await fs.writeFile(path.join(DOCS_DIR, 'sitemap.xml'), sitemapData.toString());
 }
 
 module.exports = { renderSite, generateSitemap };
