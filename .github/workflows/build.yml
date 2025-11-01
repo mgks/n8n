@@ -5,7 +5,7 @@ on:
   # You can adjust the cron schedule. '0 3 */2 * *' means:
   # 0: minute, 3: hour, */2: every 2nd day of the month, *: any month, *: any day of the week.
   schedule:
-    - cron: '0 3 */2 * *'
+    - cron: '0 3 */7 * *'
 
   # 2. Manual Trigger: Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
